@@ -1,0 +1,8 @@
+[project]
+name = "tcg"
+version = "0.0.1"
+description = "A library for working with TCG cards"
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
