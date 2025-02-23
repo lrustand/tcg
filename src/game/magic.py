@@ -1,17 +1,32 @@
+"""Definition of the Magic: the Gathering game type, and formats."""
 
 from dataclasses import dataclass
+import math
 
-from .game import Game
+from zone.zones import CommandZone
+from .game import GameType, ValueRange
 
 
 @dataclass
-class MagicTheGathering(Game):
+class MagicTheGathering(GameType):
     """Magic the Gathering."""
-    hand_size: int = 7
-    players: int = 2
+    life_total = 20
+    hand_size = ValueRange(0, 7)
+    deck_size = ValueRange(60, math.inf)
+    players = ValueRange(2, 2)
 
 
 @dataclass
 class Commander(MagicTheGathering):
     """Commander format."""
-    players: int = 4
+    life_total = 40
+    deck_size = ValueRange(100, 100)
+    players = ValueRange(2, 6)
+
+    def __post_init__(self) -> None:
+        self.zones += CommandZone
+
+
+@dataclass
+class Standard(MagicTheGathering):
+    """Standard format."""

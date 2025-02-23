@@ -1,8 +1,9 @@
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Type
 
 from card.card import Card
-from game.game import Game
+from game.game import GameType
 from game import magic
 
 
@@ -10,8 +11,8 @@ from game import magic
 class Deck:
     """A deck of cards."""
 
-    game: Game = None
-    cards: list[Card] | set[Card] = []
+    game: GameType = None
+    cards: list[Card] | set[Card] = field(default_factory=list)
 
     def validate(self) -> bool:
         """Validate the deck."""
@@ -31,5 +32,5 @@ class Deck:
 @dataclass
 class CommanderDeck(Deck):
     """A commander deck."""
-    game: magic.Commander
-    cards: set[Card] = set()
+    game: GameType = magic.Commander
+    cards: set[Type[Card]] = field(default_factory=set)

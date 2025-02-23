@@ -12,5 +12,4 @@ class Color(Enum):
     GREEN = 5
     COLORLESS = 6
 
-
 ALL_COLORS = set(Color)

@@ -1,12 +1,9 @@
 
-from mana.color import Color
 from card.spell import Spell
-from cost.mana_cost import ManaCost
+from cost.costs import ManaCost
+from mana.color import Color
+from permanent.ability.abilities import ManaAbility
 from permanent.creature import Creature
-
-
-#llanowar_elves = Creature(name="Llanowar Elves",
-#                          cost=ManaCost(specific={Color.GREEN: 1}),
 
 
 class LlanowarElves(Spell, Creature):
@@ -15,4 +12,5 @@ class LlanowarElves(Spell, Creature):
         Spell.__init__(self)
         Creature.__init__(self)
         self.name = "Llanowar Elves"
-
+        self.cost = ManaCost(Color.GREEN)
+        self.abilities = [ManaAbility]

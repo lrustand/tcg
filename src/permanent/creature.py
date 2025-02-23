@@ -10,3 +10,6 @@ class Creature(Permanent):
 
     power: int = 0
     toughness: int = 0
+    attacking: bool = False
+    blocking: bool = False
+    summoning_sick: bool = False

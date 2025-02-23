@@ -1,5 +1,5 @@
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from card.card import Card
 import cost
@@ -7,19 +7,16 @@ from counter.counter import Counter
 from mana.color import Color
 from permanent.ability.ability import Ability
 from player.player import Player
-from zone.zone import Zone
 
 
 @dataclass
 class Permanent(Card):
     """Base class for all permanents."""
 
-    owner: Player = None
     controller: Player = None
-    zone: Zone = None
     tapped: bool = False
-    counters: list[Counter] = []
-    abilities: list[Ability] = []
+    counters: list[Counter] = field(default_factory=list)
+    abilities: list[Ability] = field(default_factory=list)
 
     @property
     def color_identity(self) -> set[Color]:
@@ -29,7 +26,7 @@ class Permanent(Card):
         # Colors from ability costs
         for a in self.abilities:
             if hasattr(a, "cost"):
-                if isinstance(a.cost, cost.mana_cost.ManaCost):
+                if isinstance(a.cost, cost.costs.ManaCost):
                     colors_in_cost = set(a.cost.specific.keys())
                     colors.update(colors_in_cost)
 

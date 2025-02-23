@@ -9,4 +9,7 @@ class Action:
     """Base class for all game actions."""
 
     # The player that performs the action
-    player: Player
+    performer: Player
+
+    def resolve(self) -> None:
+        """Resolve the action."""
